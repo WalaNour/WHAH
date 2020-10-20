@@ -3,6 +3,8 @@ const { register } = require("ts-node");
 const { user } = require("./config.js");
 const mysqlConfig = require("./config.js");
 const connection = mysql.createConnection(mysqlConfig);
+
+
 connection.connect(function (err) {
   if (err) {
     console.error("error connecting: " + err.stack);
@@ -13,32 +15,34 @@ connection.connect(function (err) {
 
 let registere = (arr, callback) => {
   console.log("hheheh");
-  console.log(arr)
+
   var sql = `UPDATE students SET firstname = ? , lastname = ? , country = ?, city = ?, address = ?, driving = ?, dateOfBirth = ?, placeOfBirth = ?, nationality = ?, educationlvl = ?,feald = ? , postalcode = ?,dreamJob=?, socialLink = ?, skills = ?, languages = ?, hobbies = ?, profilePic = ?, summery= ? , firstTime = ? WHERE username= ?;`;
   connection.query(sql, arr, (err, data) => {
     if (err) throw callback(err);
     callback(null, data);
   });
 };
- 
+
 let registerCompany = (arr, callback) => {
   console.log("hheheh");
-  console.log(arr)
-  var sql = `UPDATE companies SET email = ? , owner = ? , field = ?, numberOfEmployees = ?, location = ?, website = ?, logo = ?, about = ? WHERE name= ?;`;
+  console.log(arr);
+  var sql = `UPDATE companies SET email = ? , owner = ? , field = ?, numberOfEmployees = ?, location = ?, website = ?, logo = ?, about = ? ,  firstTime = ? WHERE name= ?;`;
+
   connection.query(sql, arr, (err, data) => {
     if (err) throw callback(err);
     callback(null, data);
   });
-}
+};
 let registerTrainingCenter = (arr, callback) => {
   console.log("hahaha");
-  console.log(arr)
-  var sql = `UPDATE trainingCenters SET email = ? , owner = ? , trainingOptions = ?, numberOfStudentGraduated = ?, location = ?, website = ?, logo = ?, about = ? WHERE name= ?;`;
+  console.log(arr);
+  var sql = `UPDATE trainingCenters SET email = ? , owner = ? , trainingOptions = ?, numberOfStudentGraduated = ?, location = ?, website = ?, logo = ?, about = ? ,  firstTime = ? WHERE name= ?;`;
+
   connection.query(sql, arr, (err, data) => {
     if (err) throw callback(err);
     callback(null, data);
   });
-}
+};
 
 
 let verificationRequest = (arr, callback) => {
@@ -47,7 +51,7 @@ let verificationRequest = (arr, callback) => {
     if (err) throw callback(err);
     callback(null, data);
   });
-}
+};
 
 
 let verificationRequestCompany = (arr, callback) => {
@@ -56,7 +60,8 @@ let verificationRequestCompany = (arr, callback) => {
     if (err) throw callback(err);
     callback(null, data);
   });
-}
+};
+
 
 let verificationRequestCenter = (arr, callback) => {
   var sql = "UPDATE trainingCenters SET verRequest = ?  WHERE name= ?;";
@@ -64,7 +69,8 @@ let verificationRequestCenter = (arr, callback) => {
     if (err) throw callback(err);
     callback(null, data);
   });
-}
+};
+
 
 let verifyStudent = (arr, callback) => {
   var sql = "UPDATE students SET verification = ?  WHERE username= ?;";
@@ -72,7 +78,8 @@ let verifyStudent = (arr, callback) => {
     if (err) throw callback(err);
     callback(null, data);
   });
-}
+};
+
 
 let rejectStudent = (arr, callback) => {
   var sql = "UPDATE students SET verRequest = ?  WHERE username= ?;";
@@ -80,7 +87,8 @@ let rejectStudent = (arr, callback) => {
     if (err) throw callback(err);
     callback(null, data);
   });
-}
+};
+
 ////////////////////////////////////////////
 
 let verifyCompanies = (arr, callback) => {
@@ -89,6 +97,7 @@ let verifyCompanies = (arr, callback) => {
     if (err) throw callback(err);
     callback(null, data);
   });
+
 }
 
 let rejectCompanies = (arr, callback) => {
@@ -188,6 +197,7 @@ const getUserInfo = (username, callback) => {
   });
 };
 
+
 const addCompany = (arr, callback) => {
   let sql = 'insert into companies (name,password) values(?,?)';
   connection.query(sql, arr, (err, data) => {
@@ -238,12 +248,122 @@ const getCenterStatus = (username, callback) => {
     callback(null, data);
   });
 }
+
+// UPDATE Person
+// SET Address = 'ups'
+// WHERE LastName = 'Hussein'
+
+const saveUserToken = (username, token,callback) =>{
+  let sql = `update students set token = '${token}' WHERE username = '${username}'` 
+  connection.query(sql, (err, data)=>{
+    if (err) throw callback(err, null);
+    callback(null, data);
+  })
+}
+
+const saveCompToken = (name, token,callback) =>{
+  let sql = `update companies set token = '${token}' WHERE name = '${name}'` 
+  connection.query(sql, (err, data)=>{
+    if (err) throw callback(err, null);
+    callback(null, data);
+  })
+}
+
+const saveTcToken = (name, token,callback) =>{
+  let sql = `update trainingCenters set token = '${token}' WHERE name = '${name}'` 
+  connection.query(sql, (err, data)=>{
+    if (err) throw callback(err, null);
+    callback(null, data);
+  })
+}
+const selectUserByToken = (token, callback) =>{
+  let sql = `select * from students where token = '${token}'`
+  connection.query(sql ,(err, data)=>{
+    if (err) throw callback(err, null);
+    callback(null, data);
+  })
+}
+
+const selectCompanyByToken = (token, callback) =>{
+  let sql = `select * from companies where token = '${token}'`
+  connection.query(sql ,(err, data)=>{
+    if (err) throw callback(err, null);
+    callback(null, data);
+  })
+}
+
+const selectTcByToken = (token, callback) =>{
+  let sql = `select * from trainingCenters where token = '${token}'`
+  connection.query(sql ,(err, data)=>{
+    if (err) throw callback(err, null);
+    callback(null, data);
+  })
+}
+
+////////////////////////////////////////////
+
+
+
+/////////////////////////////////////////////////
+
+
+
+
+
+
+// UPDATE Person
+// SET Address = 'ups'
+// WHERE LastName = 'Hussein'
+
+
+
+
+
+
+const updateUser = (rowsName, update, username, callback) =>{
+  if(!update){
+    return;
+  }
+  let sql = `UPDATE students SET ${rowsName} = '${update}' WHERE username = '${username}'`
+  connection.query(sql ,(err, data)=>{
+    if (err) throw callback(err, null);
+    callback(null, data);
+  })
+}
+
+const fetchAllProfile = (callback) => {
+let sql = 'select username from students'
+connection.query(sql ,(err, data)=>{
+  if (err) throw callback(err, null);
+  callback(null, data);
+})
+}
+
+const fetchProfile = (username ,callback) => {
+  let sql = `select * from students where username = '${username}'`  
+  connection.query(sql ,(err, data)=>{
+    if (err) throw callback(err, null);
+    callback(null, data);
+  })
+  }
+
+
 module.exports = {
+  fetchProfile,
+  fetchAllProfile,
+  updateUser,
+  selectTcByToken,
+  selectCompanyByToken,
+  selectUserByToken,
+  saveTcToken,
+  saveCompToken,
+  saveUserToken,
   registere,
   verificationRequest,
   getNonVerifiedStudents,
   verifyStudent,
-  rejectStudent, 
+  rejectStudent,
+
   registerCompany,
   registerTrainingCenter,
   getNonVerifiedCompany,
@@ -262,5 +382,6 @@ module.exports = {
   logTC,
   getUserStatus,
   getCompanyStatus,
-  getCenterStatus
+  getCenterStatus,
+
 };

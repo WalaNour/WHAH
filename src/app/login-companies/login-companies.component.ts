@@ -13,8 +13,7 @@ export class LoginCompaniesComponent implements OnInit {
   constructor(private _http: HttpService , private local : LocalService, private router: Router) {}
   token: any = '';
   ngOnInit(): void {
-    
-    console.log('companies',localStorage.getItem('token'))
+    const tokenComp = localStorage.getItem('token')
   }
   signup(){
     this.router.navigateByUrl('/signup/company');
@@ -40,7 +39,8 @@ export class LoginCompaniesComponent implements OnInit {
 
         if (c1) {
           console.log("condition 1")
-          alert('hellow old user')
+         
+          this.router.navigateByUrl('/company/profile');
         }
         else if (c2) {
           console.log("condition 2")
