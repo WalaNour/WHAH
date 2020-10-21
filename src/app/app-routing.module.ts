@@ -20,6 +20,7 @@ import { ProfileCompanyComponent } from "./profile-company/profile-company.compo
 import { ProfilTcComponent } from './profil-tc/profil-tc.component';
 import { EditStudentProfileComponent} from './edit-student-profile/edit-student-profile.component'
 import { SearchResultComponent} from './search-result/search-result.component'
+import { CompanyEditComponent } from './company-edit/company-edit.component';
 
 const routes: Routes = [
   { path: 'register/student', component: VerficationComponent },
@@ -41,7 +42,8 @@ const routes: Routes = [
   { path: 'company/profile', component: ProfileCompanyComponent },
   { path: 'center/profile', component: ProfilTcComponent },
   { path: 'editStudent' , component : EditStudentProfileComponent},
-  { path: 'resultSearch' , component : SearchResultComponent},
+  { path: 'resultSearch', component: SearchResultComponent },
+  { path: 'editCompany' , component : CompanyEditComponent}  
 
 ];
 

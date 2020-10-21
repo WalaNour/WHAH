@@ -9,7 +9,7 @@ import { LocalService } from "../local.service";
   styleUrls: ["./verfication.component.css"],
 })
 export class VerficationComponent implements OnInit {
-  constructor(private _http: HttpService, private local: LocalService) {}
+  constructor(private _http: HttpService, private local: LocalService , private router : Router) {}
   obj: any;
   imageUrl: any;
   languages: any = [
@@ -265,7 +265,7 @@ export class VerficationComponent implements OnInit {
     };
     console.log(this.obj);
     this._http.httpRegister(this.obj).subscribe((data) => {
-      alert("going to your profil :))))");
+      this.router.navigateByUrl('/studentProfile')
     });
   }
 

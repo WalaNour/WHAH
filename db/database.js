@@ -347,8 +347,23 @@ const fetchProfile = (username ,callback) => {
   })
   }
 
-
+  const updateCompany = (username, obj , callback) => {
+    var arr=Object.keys(obj);
+    var arr1=Object.values(obj);
+    for(var i=0;i<arr.length;i++){
+      let sql =  `UPDATE companies SET ${arr[i]} = '${arr1[i]}' WHERE name = '${username}'`;
+      connection.query(sql, (err, data)=>{
+      if(err){
+        callback(err,null)
+      }
+      else{
+        callback(null,data)
+      }
+      })
+    }
+  }
 module.exports = {
+  updateCompany,
   fetchProfile,
   fetchAllProfile,
   updateUser,
@@ -363,7 +378,6 @@ module.exports = {
   getNonVerifiedStudents,
   verifyStudent,
   rejectStudent,
-
   registerCompany,
   registerTrainingCenter,
   getNonVerifiedCompany,

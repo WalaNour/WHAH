@@ -124,6 +124,7 @@ app.post("/api/users/registerTrainingCenter", (req, res) => {
 
     req.body.logo,
     req.body.about,
+    "false" , 
     req.body.name,
   ];
   db.registerTrainingCenter(registerArray, (err, data) => {
@@ -632,5 +633,27 @@ app.post("/api/users/TcToken", (req, res) => {
   });
 });
 
+app.post("/api/company/Update", (req, res)=>{
+  console.log(req.body)
+  var token = req.body['2']
+  console.log(token)
+  var username = "";
+  jwt.verify(token, "privatekey", (err, decoded) => {
+    username = decoded.obj.name;
+    console.log(username)
+  });
+  var obj = {}
+  for(var i = 0 ; i < req.body[0].length ; i++){
+    obj[req.body[1][i]] = req.body[0][i]
+  }
+  for(var key in obj){
+    if(!obj[key]){
+      delete obj[key]
+    }
+  }
+ db.updateCompany(username , obj, (err, data)=>{
+   err? console.log(err) :console.log(data)
+ })
+})
 
 app.listen(port, () => console.log(`server is listening on port ${port}`));

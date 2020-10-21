@@ -9,7 +9,7 @@ import { LocalService } from "../local.service";
   styleUrls: ["./company-register.component.css"],
 })
 export class CompanyRegisterComponent implements OnInit {
-  constructor(private _http: HttpService, private local: LocalService) {}
+  constructor(private _http: HttpService, private local: LocalService , private router : Router) {}
   imageUrl: any;
   obj: any;
   ngOnInit(): void {}
@@ -38,7 +38,7 @@ export class CompanyRegisterComponent implements OnInit {
     };
     console.log(this.obj);
     this._http.httpRegisterCompany(this.obj).subscribe((data) => {
-      console.log("done");
+      this.router.navigateByUrl('/company/profile')
     });
   }
   imgUpload(img) {

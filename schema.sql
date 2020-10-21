@@ -66,6 +66,20 @@ CREATE TABLE trainingCenters(
     verification VARCHAR (10)   DEFAULT 'false' , 
     verRequest VARCHAR (10)   DEFAULT 'false' , 
     firstTime VARCHAR (10)   DEFAULT 'true',
-            token varchar (300) 
+    numberOfPosts INTEGER(50) ,
+    token varchar (300) 
 
+);
+
+CREATE TABLE post(
+    id INT(4) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(50) ,
+    description VARCHAR(400) ,
+    image VARCHAR(100) ,
+    type VARCHAR(50) ,
+    owner VARCHAR(50) ,
+    rate INTEGER(10) DEFAULT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    salary INTEGER(50) , 
+   contact VARCHAR(50) , 
 );

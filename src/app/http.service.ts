@@ -126,5 +126,8 @@ export class HttpService {
   findProfil(str){
     return this.http.post(this.ROOT_URL  + '/api/users/findProfil' , str)
   }
+  updateCompanyData(obj){
+    return this.http.post(this.ROOT_URL  + '/api/company/Update' , obj)
+  }
 }
 

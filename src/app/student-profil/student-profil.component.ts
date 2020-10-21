@@ -30,7 +30,7 @@ export class StudentProfilComponent implements OnInit {
   };
   searchProfil(profilName){
     this._http.findProfil({profilName}).subscribe((res)=>{
-      this.local.otherProfile = res 
+      this.local.otherProfile = res[0]
       this.router.navigateByUrl('/resultSearch')
     })
   };

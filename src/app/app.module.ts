@@ -28,6 +28,10 @@ import { ProfileCompanyComponent } from './profile-company/profile-company.compo
 import { ProfilTcComponent } from './profil-tc/profil-tc.component';
 import { EditStudentProfileComponent } from './edit-student-profile/edit-student-profile.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { CompanyEditComponent } from './company-edit/company-edit.component';
+import { PostComapnyComponent } from './post-comapny/post-comapny.component';
+import { PostCenterComponent } from './post-center/post-center.component';
+import { FeedComponent } from './feed/feed.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +56,10 @@ import { SearchResultComponent } from './search-result/search-result.component';
     ProfilTcComponent,
     EditStudentProfileComponent,
     SearchResultComponent,
+    CompanyEditComponent,
+    PostComapnyComponent,
+    PostCenterComponent,
+    FeedComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalService } from '../local.service'
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-search-result',
@@ -8,10 +9,10 @@ import { LocalService } from '../local.service'
 })
 export class SearchResultComponent implements OnInit {
 
-  constructor(private local : LocalService) { }
-
+  constructor(private local : LocalService , private _http : HttpService) { }
+  userData: any; 
   ngOnInit(): void {
     console.log(this.local.otherProfile)
+    this.userData = this.local.otherProfile
   }
-
 }

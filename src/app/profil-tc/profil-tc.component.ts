@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { Router } from '@angular/router';
+import { LocalService } from '../local.service'
 
 
 
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ProfilTcComponent implements OnInit{
 
-  constructor(private _http: HttpService, private router: Router) { }
+  constructor(private _http: HttpService, private router: Router , private local : LocalService) { }
 
   userData : any ; 
 
@@ -25,5 +26,10 @@ export class ProfilTcComponent implements OnInit{
       console.log(this.userData)
     })
   }
-
+  searchProfil(profilName){
+    this._http.findProfil({profilName}).subscribe((res)=>{
+      this.local.otherProfile = res[0]
+      this.router.navigateByUrl('/resultSearch')
+    })
+  };
 }

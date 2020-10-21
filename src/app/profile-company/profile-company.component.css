@@ -17,7 +17,25 @@
         touch-action: pan-y;
     -webkit-tap-highlight-color: transparent;
 }
+.left {
+  margin-left: 10%;
+}
+.in{
+  width: 450px;
+  border-radius: 7%;
+border-color: lightgray;
+}
+.mid{
+  margin-left: 30%;
 
+}
+.big{
+  width: 90px;
+  color: #eee;
+  background-color: #927943;
+  border-radius: 4%;
+  border: none;
+}
 .slick-list
 {
     position: relative;

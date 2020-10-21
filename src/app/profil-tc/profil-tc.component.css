@@ -8,6 +8,22 @@ body{
     border-radius: 0.5rem;
     background: #fff;
 }
+.in{
+    width: 450px;
+    border-radius: 7%;
+  border-color: lightgray;
+  }
+  .mid{
+    margin-left: 30%;
+  
+  }
+  .big{
+    width: 90px;
+    color: #eee;
+    background-color: #7080db;
+    border-radius: 4%;
+    border: none;
+  }
 .profile-img{
     text-align: center;
 }

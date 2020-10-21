@@ -9,7 +9,7 @@ import { LocalService } from "../local.service";
   styleUrls: ["./training-center-register.component.css"],
 })
 export class TrainingCenterRegisterComponent implements OnInit {
-  constructor(private _http: HttpService, private local: LocalService) {}
+  constructor(private _http: HttpService, private local: LocalService , private router : Router) {}
   obj: any;
   imageUrl: any;
   ngOnInit(): void {}
@@ -37,7 +37,7 @@ export class TrainingCenterRegisterComponent implements OnInit {
     };
     console.log(this.obj);
     this._http.httpRegisterTrainingCenter(this.obj).subscribe((data) => {
-      console.log("done");
+      this.router.navigateByUrl('/center/profile')
     });
   }
   imgUpload(img) {
